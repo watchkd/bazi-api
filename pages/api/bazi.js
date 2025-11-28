@@ -1,10 +1,10 @@
-export default function handler(req, res) {
+ï»¿export default function handler(req, res) {
   const { year, month, day, hour } = req.query;
   if (!year || !month || !day || !hour) {
-    return res.status(400).json({ error: 'ÇëÌá¹© year, month, day, hour ²ÎÊı' });
+    return res.status(400).json({ error: 'è¯·æä¾› year, month, day, hour å‚æ•°' });
   }
   res.status(200).json({
-    message: "¹§Ï²£¡API ÒÑ³É¹¦ÔËĞĞ£¡",
+    message: "æ­å–œï¼API å·²æˆåŠŸè¿è¡Œï¼",
     input: { year, month, day, hour }
   });
 }
