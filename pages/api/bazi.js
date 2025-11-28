@@ -1,11 +1,9 @@
 ﻿export default function handler(req, res) {
-  // 禁用缓存
+  // 强制设置响应头
+  res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
-
-  // 强制 JSON 类型
-  res.setHeader('Content-Type', 'application/json');
 
   const query = req.query || {};
   const { year, month, day, hour } = query;
