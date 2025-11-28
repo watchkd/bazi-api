@@ -1,12 +1,15 @@
 ﻿export default function handler(req, res) {
-  // 强制设置 Content-Type
+  // 禁用缓存
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+
+  // 强制 JSON 类型
   res.setHeader('Content-Type', 'application/json');
 
-  // 安全获取 query 参数
   const query = req.query || {};
   const { year, month, day, hour } = query;
 
-  // 转换为字符串并清理
   const params = {
     year: typeof year === 'string' ? year.trim() : String(year),
     month: typeof month === 'string' ? month.trim() : String(month),
@@ -14,7 +17,6 @@
     hour: typeof hour === 'string' ? hour.trim() : String(hour),
   };
 
-  // 验证必填字段
   if (!params.year || !params.month || !params.day || !params.hour) {
     return res.status(400).json({
       error: '请提供 year, month, day, hour 参数（不能为空）'
@@ -22,7 +24,6 @@
   }
 
   try {
-    // 成功响应
     res.status(200).json({
       message: "恭喜！API 已成功运行！",
       input: params
